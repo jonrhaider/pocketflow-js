@@ -2,6 +2,45 @@
 
 A minimalist LLM framework for building AI agents and workflows with JSON configuration.
 
+> **🎯 Key Innovation**: This package includes a **Meta Agent Creator** that allows LLMs to automatically generate and execute new agentic workflows from natural language descriptions. This enables dynamic agent creation via API endpoints or direct LLM integration.
+
+## 🙏 Credits
+
+This JavaScript implementation is based on the original [PocketFlow Python framework](https://github.com/The-Pocket/PocketFlow) created by [Zachary Huang](https://github.com/The-Pocket) and The-Pocket team. The original framework pioneered the concept of "Agentic Coding" - where humans design and AI agents code.
+
+**Original Python Framework**: [The-Pocket/PocketFlow](https://github.com/The-Pocket/PocketFlow)  
+**Author**: [Zachary Huang](https://github.com/The-Pocket)  
+**Concept**: "100 Lines Let Agents build Agent"
+
+## 🤖 **Meta Agent Creator - The Game Changer**
+
+The **Meta Agent Creator** is what makes this package revolutionary. It allows you to:
+
+- **🎯 Create agents from natural language**: "Create a sentiment analyzer" → Working agent
+- **🚀 Dynamic agent generation**: Build agents on-demand via API endpoints  
+- **🔄 LLM-to-Agent pipeline**: Any LLM can create new agents automatically
+- **⚡ Real-time agent creation**: Generate and execute agents in milliseconds
+
+### **Example: API Endpoint for Dynamic Agent Creation**
+```javascript
+// server.js - Create agents via HTTP requests
+app.post('/api/create-agent', async (req, res) => {
+    const { description, input } = req.body;
+    
+    // Meta Agent Creator generates and runs agent automatically
+    const result = await metaCreator.createAndRunAgent(description, input);
+    
+    res.json({ 
+        success: true, 
+        agent_result: result.shared,
+        generated_config: result.config 
+    });
+});
+
+// Usage: POST /api/create-agent
+// Body: { "description": "Create a text summarizer", "input": { "text": "..." } }
+```
+
 ## 🚀 Quick Start
 
 > **📋 Setup Guide**: See [SETUP.md](./SETUP.md) for detailed installation and integration instructions.
@@ -41,7 +80,9 @@ const { flow } = compiler.compile(agentConfig);
 await flow.run({ name: "World" });
 ```
 
-### Meta Agent Creator (AI creates agents from descriptions)
+### 🎯 **Meta Agent Creator (AI creates agents from descriptions)**
+
+**The revolutionary feature that enables dynamic agent creation:**
 
 **CommonJS (require):**
 ```javascript
@@ -53,6 +94,8 @@ const { MetaAgentCreator } = require('pocketflow-js/compiler');
 import { MetaAgentCreator } from 'pocketflow-js/compiler';
 ```
 
+**Basic Usage:**
+```javascript
 // Create meta agent creator
 const metaCreator = new MetaAgentCreator(yourLLM);
 
@@ -63,6 +106,50 @@ const result = await metaCreator.createAndRunAgent(
 );
 
 console.log('Agent result:', result.shared.result);
+```
+
+**Advanced: API Endpoint Integration:**
+```javascript
+// Express.js endpoint for dynamic agent creation
+app.post('/api/agent/create', async (req, res) => {
+    try {
+        const { description, input } = req.body;
+        
+        // Meta Agent Creator automatically:
+        // 1. Generates JSON DSL configuration
+        // 2. Compiles it into executable PocketFlow
+        // 3. Runs the agent with provided input
+        const result = await metaCreator.createAndRunAgent(description, input);
+        
+        res.json({
+            success: true,
+            result: result.shared,
+            config: result.config, // The generated JSON DSL
+            execution_time: result.execution_time
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+```
+
+**Real-world Examples:**
+```javascript
+// Create different types of agents dynamically
+await metaCreator.createAndRunAgent(
+    "Create a text summarizer", 
+    { text: "Long article content..." }
+);
+
+await metaCreator.createAndRunAgent(
+    "Create a code reviewer that checks for security issues",
+    { code: "function login() { ... }" }
+);
+
+await metaCreator.createAndRunAgent(
+    "Create a data analyzer that finds trends in CSV data",
+    { csv_data: "name,age,score\nJohn,25,85..." }
+);
 ```
 
 ## 📁 Package Contents
@@ -81,6 +168,22 @@ PocketFlow uses a **Graph + Shared Store** model:
 - **Edges** connect nodes with labeled actions for routing
 - **Shared Store** enables communication between nodes
 - **Flows** orchestrate node execution
+
+## 🎯 **JSON DSL - The Automation Engine**
+
+The JSON DSL is what enables the Meta Agent Creator to automatically generate working agents. This simple configuration format allows LLMs to create complex workflows:
+
+### **Why JSON DSL is Revolutionary:**
+- **🤖 LLM-Friendly**: LLMs can easily generate valid JSON configurations
+- **⚡ Instant Compilation**: JSON → Executable PocketFlow in milliseconds  
+- **🔄 Dynamic Creation**: Generate new agents on-demand from descriptions
+- **🎯 No Coding Required**: Natural language → Working agents
+
+### **How It Works:**
+1. **User describes agent**: "Create a sentiment analyzer"
+2. **LLM generates JSON DSL**: Automatically creates valid configuration
+3. **Compiler converts to executable**: JSON → PocketFlow objects
+4. **Agent runs immediately**: Execute with real data
 
 ## 📝 JSON DSL
 
@@ -299,6 +402,36 @@ const schema = require('./schema.json');
 const ajv = new Ajv();
 const validate = ajv.compile(schema);
 const valid = validate(yourConfig);
+```
+
+## 🚀 **Use Cases & Benefits**
+
+### **🎯 Perfect For:**
+- **API Endpoints**: Create agents dynamically via HTTP requests
+- **LLM Applications**: Let users describe what they want, get working agents
+- **Automation Platforms**: Build agent creation into your workflow tools
+- **Rapid Prototyping**: Test agent ideas without writing code
+- **Multi-Tenant Apps**: Each user gets custom agents for their needs
+
+### **💡 Real-World Examples:**
+```javascript
+// Customer support platform
+await metaCreator.createAndRunAgent(
+    "Create a support agent for our SaaS product",
+    { user_question: "How do I reset my password?" }
+);
+
+// Content moderation system  
+await metaCreator.createAndRunAgent(
+    "Create a content moderator that flags inappropriate content",
+    { content: "User-generated post content..." }
+);
+
+// Business intelligence
+await metaCreator.createAndRunAgent(
+    "Create a sales data analyzer that finds conversion trends",
+    { sales_data: "csv data here..." }
+);
 ```
 
 ## 📖 Design Patterns

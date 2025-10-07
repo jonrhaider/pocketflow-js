@@ -43,12 +43,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-org/pocketflow-js.git"
+    "url": "git+https://github.com/jonrhaider/pocketflow-js.git"
   },
   "bugs": {
-    "url": "https://github.com/your-org/pocketflow-js/issues"
+    "url": "https://github.com/jonrhaider/pocketflow-js/issues"
   },
-  "homepage": "https://github.com/your-org/pocketflow-js#readme",
+  "homepage": "https://github.com/jonrhaider/pocketflow-js#readme",
   "exports": {
     ".": {
       "import": "./index.js",
