@@ -1,6 +1,6 @@
 {
   "name": "pocketflow-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A minimalist LLM framework for building AI agents and workflows with JSON configuration",
   "main": "index.js",
   "module": "index.js",
@@ -8,7 +8,9 @@
   "scripts": {
     "test": "node examples/test-compiler.js",
     "example": "node examples/example-workflow.js",
-    "validate": "node -e \"const Ajv = require('ajv'); const schema = require('./schema.json'); const ajv = new Ajv(); console.log('Schema is valid:', ajv.validateSchema(schema));\""
+    "validate": "node -e \"const Ajv = require('ajv'); const schema = require('./schema.json'); const ajv = new Ajv(); console.log('Schema is valid:', ajv.validateSchema(schema));\"",
+    "postinstall": "node -e \"const fs = require('fs'); const path = require('path'); if (!fs.existsSync('.cursorrules')) { fs.copyFileSync(path.join(__dirname, '.cursorrules'), '.cursorrules'); console.log('✅ .cursorrules copied to project root for Cursor AI assistance'); }\"",
+    "setup": "node setup.js"
   },
   "keywords": [
     "ai",
@@ -35,6 +37,7 @@
     "index.js",
     "compiler.js",
     "schema.json",
+    "setup.js",
     "README.md",
     "SETUP.md",
     ".cursorrules",

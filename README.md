@@ -45,6 +45,9 @@ app.post('/api/create-agent', async (req, res) => {
 
 > **📋 Setup Guide**: See [SETUP.md](./SETUP.md) for detailed installation and integration instructions.
 
+### **Automatic Cursor AI Setup**
+The package automatically copies `.cursorrules` to your project root during installation, giving Cursor AI full context about PocketFlow development patterns.
+
 ### Traditional Approach (JSON DSL)
 
 **CommonJS (require):**
