@@ -1,6 +1,6 @@
 {
   "name": "pocketflow-js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A minimalist LLM framework for building AI agents and workflows with JSON configuration",
   "main": "index.js",
   "module": "index.js",
