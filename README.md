@@ -6,7 +6,7 @@ A minimalist LLM framework for building AI agents and workflows with JSON config
 
 ## 🙏 Credits
 
-This JavaScript implementation is based on the original [PocketFlow Python framework](https://github.com/The-Pocket/PocketFlow) created by [Zachary Huang](https://github.com/The-Pocket) and The-Pocket team. The original framework pioneered the concept of "Agentic Coding" - where humans design and AI agents code.
+This JavaScript implementation is based on the original [PocketFlow Python framework](https://github.com/The-Pocket/PocketFlow) created by [Zachary Huang](https://github.com/zachary62) and The-Pocket team. The original framework pioneered the concept of "Agentic Coding" - where AI Agents (e.g., Cursor AI) build Agents. With this version, not only can AI agents create (and hardcode) agents into your codebase, but rather, you can now use the DSL method to have a single LLM call return a new agentic JSON object which the "compiler" can execute, on the fly. What does this mean? It means you can allow your backend make an http call to an LLM to create and run a new agentic flow AT RUNTIME! 
 
 **Original Python Framework**: [The-Pocket/PocketFlow](https://github.com/The-Pocket/PocketFlow)  
 **Author**: [Zachary Huang](https://github.com/zachary62)  
