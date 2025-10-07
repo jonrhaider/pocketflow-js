@@ -52,6 +52,7 @@
     "url": "https://github.com/jonrhaider/pocketflow-js/issues"
   },
   "homepage": "https://github.com/jonrhaider/pocketflow-js#readme",
+  "readme": "README.md",
   "exports": {
     ".": {
       "import": "./index.js",
