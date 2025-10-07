@@ -9,7 +9,7 @@ A minimalist LLM framework for building AI agents and workflows with JSON config
 This JavaScript implementation is based on the original [PocketFlow Python framework](https://github.com/The-Pocket/PocketFlow) created by [Zachary Huang](https://github.com/The-Pocket) and The-Pocket team. The original framework pioneered the concept of "Agentic Coding" - where humans design and AI agents code.
 
 **Original Python Framework**: [The-Pocket/PocketFlow](https://github.com/The-Pocket/PocketFlow)  
-**Author**: [Zachary Huang](https://github.com/The-Pocket)  
+**Author**: [Zachary Huang](https://github.com/zachary62)  
 **Concept**: "100 Lines Let Agents build Agent"
 
 ## 🤖 **Meta Agent Creator - The Game Changer**
