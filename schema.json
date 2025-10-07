@@ -1,0 +1,159 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PocketFlow-JS DSL Schema",
+  "description": "JSON schema for PocketFlow JavaScript DSL configuration",
+  "type": "object",
+  "required": ["version", "entry", "nodes", "edges"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "DSL version identifier",
+      "pattern": "^pf-js/\\d+\\.\\d+$"
+    },
+    "entry": {
+      "type": "string",
+      "description": "Entry point node ID"
+    },
+    "globals": {
+      "type": "object",
+      "description": "Global parameters available to all nodes",
+      "additionalProperties": true
+    },
+    "nodes": {
+      "type": "array",
+      "description": "Array of node definitions",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique node identifier"
+          },
+          "kind": {
+            "type": "string",
+            "enum": ["llm", "http", "router", "data", "batch", "async", "parallel"],
+            "description": "Node type/kind"
+          },
+          "params": {
+            "type": "object",
+            "description": "Node-specific parameters",
+            "additionalProperties": true
+          },
+          "prep": {
+            "type": "object",
+            "description": "Preparation logic configuration",
+            "properties": {
+              "inputs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "path": { "type": "string" },
+                    "required": { "type": "boolean" },
+                    "default": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "exec": {
+            "type": "object",
+            "description": "Execution logic configuration",
+            "properties": {
+              "prompt": { "type": "string" },
+              "model": { "type": "string" },
+              "url": { "type": "string" },
+              "method": { "type": "string", "enum": ["GET", "POST", "PUT", "DELETE", "PATCH"] },
+              "headers": { "type": "object" },
+              "body": { "type": "object" },
+              "cases": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "label": { "type": "string" },
+                    "when": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "post": {
+            "type": "object",
+            "description": "Post-processing configuration",
+            "properties": {
+              "outputs": {
+                "type": "object",
+                "properties": {
+                  "save": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": ["path", "value"],
+                      "properties": {
+                        "path": { "type": "string" },
+                        "value": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              },
+              "next": {
+                "type": "string",
+                "description": "Next action label to return"
+              }
+            }
+          },
+          "retry": {
+            "type": "object",
+            "description": "Retry configuration",
+            "properties": {
+              "max": { "type": "integer", "minimum": 0 },
+              "wait": { "type": "number", "minimum": 0 },
+              "backoff": { "type": "string", "enum": ["fixed", "exponential"] }
+            }
+          },
+          "timeout": {
+            "type": "number",
+            "description": "Timeout in milliseconds",
+            "minimum": 0
+          },
+          "loop_guard": {
+            "type": "object",
+            "description": "Loop prevention configuration",
+            "properties": {
+              "max_iterations": { "type": "integer", "minimum": 1 }
+            }
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "description": "Array of edge definitions connecting nodes",
+      "items": {
+        "type": "object",
+        "required": ["from", "to"],
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "Source node ID"
+          },
+          "to": {
+            "type": "string",
+            "description": "Target node ID"
+          },
+          "label": {
+            "type": "string",
+            "description": "Edge label/action (defaults to 'default')"
+          },
+          "when": {
+            "type": "string",
+            "description": "Conditional expression for edge activation"
+          }
+        }
+      }
+    }
+  }
+}

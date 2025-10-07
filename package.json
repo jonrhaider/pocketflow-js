@@ -1,0 +1,66 @@
+{
+  "name": "pocketflow-js",
+  "version": "1.0.0",
+  "description": "A minimalist LLM framework for building AI agents and workflows with JSON configuration",
+  "main": "index.js",
+  "module": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node examples/test-compiler.js",
+    "example": "node examples/example-workflow.js",
+    "validate": "node -e \"const Ajv = require('ajv'); const schema = require('./schema.json'); const ajv = new Ajv(); console.log('Schema is valid:', ajv.validateSchema(schema));\""
+  },
+  "keywords": [
+    "ai",
+    "llm",
+    "workflow",
+    "agent",
+    "automation",
+    "pocketflow",
+    "javascript"
+  ],
+  "author": "PocketFlow Team",
+  "license": "MIT",
+  "dependencies": {
+    "ajv": "^8.12.0"
+  },
+  "peerDependencies": {
+    "openai": "^4.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "dotenv": "^16.0.0"
+  },
+  "files": [
+    "index.js",
+    "compiler.js",
+    "schema.json",
+    "README.md",
+    "SETUP.md",
+    ".cursorrules",
+    "examples/",
+    "docs/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-org/pocketflow-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/pocketflow-js/issues"
+  },
+  "homepage": "https://github.com/your-org/pocketflow-js#readme",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.js"
+    },
+    "./compiler": {
+      "import": "./compiler.js",
+      "require": "./compiler.js"
+    },
+    "./schema": {
+      "import": "./schema.json",
+      "require": "./schema.json"
+    }
+  }
+}
